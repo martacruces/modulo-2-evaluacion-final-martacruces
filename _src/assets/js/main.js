@@ -55,10 +55,10 @@ function manageShowClick(event) {
             return false;
         }
     });
-    updateFavorites(foundShow);
+    updateFavoritesOnLocalStorage(foundShow);
     displayFavorites();
 };
-function updateFavorites(favorite) { 
+function updateFavoritesOnLocalStorage(favorite) { 
     const favoritesArr = getFavoritesFromLocalStorage();
     const foundIndex = favoritesArr.findIndex((item) => {
         if (item.show.id === favorite.show.id) {
@@ -82,6 +82,7 @@ function displayFavorites () {
         const elementLi = document.createElement('li');
         const elementImg = document.createElement('img');
         const elementSpan = document.createElement('span');
+        const btnRemoveFavorite = document.createElement('button');
 
         elementLi.id = item.show.id;
         elementLi.classList.add('show');
@@ -92,10 +93,32 @@ function displayFavorites () {
             elementImg.src = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
         }
 
+        btnRemoveFavorite.addEventListener('click', manageRemoveFavorite);
+
         elementLi.appendChild(elementSpan);
         elementLi.appendChild(elementImg);
+        elementLi.appendChild(btnRemoveFavorite);
         favoritesList.appendChild(elementLi);
     };
+};
+
+function manageRemoveFavorite (event) {
+    const parentLi = event.currentTarget.parentElement;
+    const clickedId = parseInt(parentLi.id);
+    const favoritesArr = getFavoritesFromLocalStorage();
+    const foundShow = favoritesArr.find((item) => {
+        if (item.show.id === clickedId) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    updateFavoritesOnLocalStorage(foundShow);
+    displayFavorites();
+    const resultsElement = document.querySelector(`#result-list [id="${clickedId}"]`);
+    if (resultsElement !== null) {
+        resultsElement.classList.toggle('show--selected');
+    }
 };
 
 function getFavoritesFromLocalStorage() {
@@ -104,4 +127,5 @@ function getFavoritesFromLocalStorage() {
     return favoritesArr;
 };
 
+window.addEventListener('load', displayFavorites);
 form.addEventListener('submit', findShowsByName);
