@@ -21,6 +21,7 @@ function findShowsByName(event) {
 };
 function displayShows(shows) {
     resultList.innerHTML = '';
+    const favoritesArr = getFavoritesFromLocalStorage();
 
     for (let item of shows) {
         const elementLi = document.createElement('li');
@@ -29,6 +30,19 @@ function displayShows(shows) {
 
         elementLi.id = item.show.id;
         elementLi.classList.add('show');
+
+        const foundFavorite = favoritesArr.find((favItem) => {
+            if (favItem.show.id === item.show.id) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        if (foundFavorite !== undefined) {
+            elementLi.classList.add('show--selected');
+        }
+
         elementTitle.innerHTML = item.show.name;
         elementTitle.classList.add('show__title');
         if (item.show.image !== null) {
@@ -45,6 +59,11 @@ function displayShows(shows) {
         resultList.appendChild(elementLi);
     };
 };
+
+function selectShowIfFavorite() {
+
+};
+
 function manageShowClick(event) {
     const clickedElement = event.currentTarget;
     const clickedId = parseInt(clickedElement.id);
