@@ -5,6 +5,7 @@ const form = document.getElementById('form');
 const txtSearch = document.getElementById('txt-search');
 const btnSearch = document.getElementById('btn-search');
 const resultList = document.getElementById('result-list');
+const msgNoResults = document.getElementById('msg-no-results');
 const favoritesList = document.getElementById('favorites-list');
 const favoritesKey = 'favorites';
 let showsList = [];
@@ -17,51 +18,57 @@ function findShowsByName(event) {
         .then(data => {
             showsList = data;
             displayShows(data);
+        })
+        .catch(() => {
+            showsList = [];
+            displayShows([]);
         });
 };
 function displayShows(shows) {
     resultList.innerHTML = '';
-    const favoritesArr = getFavoritesFromLocalStorage();
 
-    for (let item of shows) {
-        const elementLi = document.createElement('li');
-        const elementImg = document.createElement('img');
-        const elementTitle = document.createElement('p');
+    if (shows.length > 0) {
+        msgNoResults.classList.add('msg-no-results--hidden');
+        const favoritesArr = getFavoritesFromLocalStorage();
 
-        elementLi.id = item.show.id;
-        elementLi.classList.add('show');
+        for (let item of shows) {
+            const elementLi = document.createElement('li');
+            const elementImg = document.createElement('img');
+            const elementTitle = document.createElement('p');
 
-        const foundFavorite = favoritesArr.find((favItem) => {
-            if (favItem.show.id === item.show.id) {
-                return true;
-            } else {
-                return false;
+            elementLi.id = item.show.id;
+            elementLi.classList.add('show');
+
+            const foundFavorite = favoritesArr.find((favItem) => {
+                if (favItem.show.id === item.show.id) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            if (foundFavorite !== undefined) {
+                elementLi.classList.add('show--selected');
             }
-        });
 
-        if (foundFavorite !== undefined) {
-            elementLi.classList.add('show--selected');
-        }
+            elementTitle.innerHTML = item.show.name;
+            elementTitle.classList.add('show__title');
+            if (item.show.image !== null) {
+                elementImg.src = item.show.image.medium || item.show.image.original
+            } else {
+                elementImg.src = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
+            }
+            elementImg.classList.add('show__poster');
 
-        elementTitle.innerHTML = item.show.name;
-        elementTitle.classList.add('show__title');
-        if (item.show.image !== null) {
-            elementImg.src = item.show.image.medium || item.show.image.original
-        } else {
-            elementImg.src = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
-        }
-        elementImg.classList.add('show__poster');
+            elementLi.addEventListener('click', manageShowClick);
 
-        elementLi.addEventListener('click', manageShowClick);
-
-        elementLi.appendChild(elementImg);
-        elementLi.appendChild(elementTitle);
-        resultList.appendChild(elementLi);
-    };
-};
-
-function selectShowIfFavorite() {
-
+            elementLi.appendChild(elementImg);
+            elementLi.appendChild(elementTitle);
+            resultList.appendChild(elementLi);
+        };
+    } else {
+        msgNoResults.classList.remove('msg-no-results--hidden');
+    }
 };
 
 function manageShowClick(event) {

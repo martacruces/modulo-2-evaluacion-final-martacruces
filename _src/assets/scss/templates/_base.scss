@@ -1,17 +1,21 @@
 html {
     font-size: $default-font-size;
+    font-family: $default-font-family;
 }
 
 .page__header {
     text-align: center;
     font-size: 2.5rem;
     font-weight: bold;
-    padding: 16px;
+    font-style: italic;
+    color: $color-show-title;
+    padding: 32px;
 }
 
 .page__main {
     display: flex;
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .page__left-section {
@@ -74,10 +78,12 @@ html {
 }
 
 .left-section__title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
+    font-style: italic;
     margin-bottom: 16px;
     text-align: center;
+    color: $color-show-title;
 }
 
 .fav-show {
@@ -88,6 +94,9 @@ html {
     &__title {
         padding: 16px;
         font-weight: bold;
+        color: $color-bg-show;
+        flex: 1;
+        overflow: hidden;
     }
 
     &__poster {
@@ -97,7 +106,7 @@ html {
     &__remove-button {
         border: none;
         border-radius: 50%;
-        background-color: black;
+        background-color: $color-show-title;
         color: $color-white;
         font-weight: bold;
         font-size: 0.7rem;
@@ -106,5 +115,22 @@ html {
         height: 16px;
         padding: 0;
         cursor: pointer;
+    }
+}
+
+.msg-no-results {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__text {
+        font-size: 1.5rem;
+    }
+    &__icon {
+        font-size: 5rem;
+        margin-bottom: 16px;
+    }
+    &--hidden {
+        display: none;
     }
 }
