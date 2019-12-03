@@ -69,7 +69,7 @@ html {
         box-shadow: none;
         border: none;
         border-bottom: 1px solid black;
-        background-color: #fbfbfb;
+        background-color: $color-white;
         padding: 8px;
         margin-right: 8px;
         max-width: 60%;
@@ -135,6 +135,9 @@ html {
     &__icon {
         font-size: 5rem;
         margin-bottom: 16px;
+        animation-name: animated-icon;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
     }
     &--hidden {
         display: none;

@@ -1,0 +1,8 @@
+@keyframes animated-icon {
+    0% {transform: rotate(0);}
+    15% {transform: rotate(-45deg);}
+    30% {transform: rotate(45deg);}
+    45% {transform: rotate(-45deg);}
+    60% {transform: rotate(45deg);}
+    75% {transform: rotate(0);}
+}
