@@ -25,21 +25,23 @@ function displayShows(shows) {
     for (let item of shows) {
         const elementLi = document.createElement('li');
         const elementImg = document.createElement('img');
-        const elementSpan = document.createElement('span');
+        const elementTitle = document.createElement('p');
 
         elementLi.id = item.show.id;
         elementLi.classList.add('show');
-        elementSpan.innerHTML = item.show.name;
+        elementTitle.innerHTML = item.show.name;
+        elementTitle.classList.add('show__title');
         if (item.show.image !== null) {
             elementImg.src = item.show.image.medium || item.show.image.original
         } else {
             elementImg.src = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
         }
+        elementImg.classList.add('show__poster');
 
         elementLi.addEventListener('click', manageShowClick);
 
-        elementLi.appendChild(elementSpan);
         elementLi.appendChild(elementImg);
+        elementLi.appendChild(elementTitle);
         resultList.appendChild(elementLi);
     };
 };
@@ -81,22 +83,26 @@ function displayFavorites () {
     for (let item of favoritesArr) {
         const elementLi = document.createElement('li');
         const elementImg = document.createElement('img');
-        const elementSpan = document.createElement('span');
+        const elementTitle = document.createElement('p');
         const btnRemoveFavorite = document.createElement('button');
 
         elementLi.id = item.show.id;
-        elementLi.classList.add('show');
-        elementSpan.innerHTML = item.show.name;
+        elementLi.classList.add('fav-show');
+        elementTitle.innerHTML = item.show.name;
+        elementTitle.classList.add('fav-show__title');
         if (item.show.image !== null) {
             elementImg.src = item.show.image.medium || item.show.image.original
         } else {
             elementImg.src = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
         }
+        elementImg.classList.add('fav-show__poster');
+        btnRemoveFavorite.innerHTML = 'x';
+        btnRemoveFavorite.classList.add('fav-show__remove-button');
 
         btnRemoveFavorite.addEventListener('click', manageRemoveFavorite);
 
-        elementLi.appendChild(elementSpan);
         elementLi.appendChild(elementImg);
+        elementLi.appendChild(elementTitle);
         elementLi.appendChild(btnRemoveFavorite);
         favoritesList.appendChild(elementLi);
     };

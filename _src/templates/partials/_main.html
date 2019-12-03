@@ -1,8 +1,13 @@
 <main class="page__main">
-    <form action="" method="post" id="form">
-        <input type="text" id="txt-search">
-        <button type="submit" id="btn-search">Buscar</button>
-    </form>
-    <ul id="result-list"></ul>
-    <ul id="favorites-list"></ul>
+    <section class="page__left-section">
+        <form action="" method="post" id="form" class="search-form">
+            <input type="text" id="txt-search" class="search-form__input">
+            <button type="submit" id="btn-search" class="search-form__button">Buscar</button>
+        </form>
+        <h2 class="left-section__title">Mis series favoritas</h2>
+        <ul id="favorites-list" class="favorites-list"></ul>
+    </section>
+    <section class="page__right-section">
+        <ul id="result-list" class="result-list"></ul>
+    </section>
 </main>
