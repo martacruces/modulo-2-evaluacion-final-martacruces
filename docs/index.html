@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Buscador de series</title>
+        <link rel="icon" href="./favicon.png" />
+        <link href="https://fonts.googleapis.com/css?family=Tomorrow:400,400i,700,700i&display=swap"
+        rel="stylesheet">
+        <script src="http://kit.fontawesome.com/672e03816c.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./assets/css/main.css" />
+    </head>
+    
+    <body>
+        <div class="page">
+            <header class="page__header">
+                 <h1>Buscador de series</h1>
+
+            </header>
+            <main class="page__main">
+                <section class="page__left-section">
+                    <form action="" method="post" id="form" class="search-form">
+                        <input type="text" id="txt-search" class="search-form__input">
+                        <button type="submit" id="btn-search" class="search-form__button">Buscar</button>
+                    </form>
+                     <h2 class="left-section__title">Mis series favoritas</h2>
+
+                    <ul id="favorites-list" class="favorites-list"></ul>
+                </section>
+                <section class="page__right-section">
+                    <div id="msg-no-results" class="msg-no-results msg-no-results--hidden">
+                        <p class="msg-no-results__icon"><i class="far fa-sad-cry"></i>
+
+                        </p>
+                        <p class="msg-no-results__text">No se han encontrado resultados</p>
+                    </div>
+                    <ul id="result-list" class="result-list"></ul>
+                </section>
+            </main>
+        </div>
+        <script type="text/javascript" src="./assets/js/main.js"></script>
+    </body>
+
+</html>
