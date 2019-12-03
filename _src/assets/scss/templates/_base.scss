@@ -38,6 +38,8 @@ html {
     background-color: $color-bg-show;
     text-align: center;
     cursor: pointer;
+    overflow: hidden;
+    transition: all 0.25s ease-in-out;
     &__poster {
         max-width: 100%;
     }
@@ -53,6 +55,10 @@ html {
         .show__title {
             color: $color-bg-show;
         }
+    }
+
+    &:hover{
+        transform: scale(1.05);
     }
 }
 
