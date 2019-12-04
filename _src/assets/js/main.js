@@ -164,9 +164,7 @@ function getFavoritesFromLocalStorage() {
 };
 
 function getLogFavorites () {
-    getFavoritesFromLocalStorage();
-    const favoritesJson = localStorage.getItem(favoritesKey) || '[]';
-    const favoritesArr = JSON.parse(favoritesJson);
+    const favoritesArr = getFavoritesFromLocalStorage();
     for (let item of favoritesArr) {
         console.log(item.show.name);
     }
