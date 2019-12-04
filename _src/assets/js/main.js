@@ -8,6 +8,7 @@ const resultList = document.getElementById('result-list');
 const msgNoResults = document.getElementById('msg-no-results');
 const favoritesList = document.getElementById('favorites-list');
 const favoritesKey = 'favorites';
+const buttonLog = document.querySelector('#btn-log');
 let showsList = [];
 
 function findShowsByName(event) {
@@ -35,6 +36,7 @@ function displayShows(shows) {
             const elementLi = document.createElement('li');
             const elementImg = document.createElement('img');
             const elementTitle = document.createElement('p');
+            const elementStatus = document.createElement('p');
 
             elementLi.id = item.show.id;
             elementLi.classList.add('show');
@@ -52,6 +54,7 @@ function displayShows(shows) {
             }
 
             elementTitle.innerHTML = item.show.name;
+            elementStatus.innerHTML = item.show.status;
             elementTitle.classList.add('show__title');
             if (item.show.image !== null) {
                 elementImg.src = item.show.image.medium || item.show.image.original
@@ -65,6 +68,7 @@ function displayShows(shows) {
             elementLi.appendChild(elementImg);
             elementLi.appendChild(elementTitle);
             resultList.appendChild(elementLi);
+            elementLi.appendChild(elementStatus);
         };
     } else {
         msgNoResults.classList.remove('msg-no-results--hidden');
@@ -159,5 +163,16 @@ function getFavoritesFromLocalStorage() {
     return favoritesArr;
 };
 
+function getLogFavorites () {
+    getFavoritesFromLocalStorage();
+    const favoritesJson = localStorage.getItem(favoritesKey) || '[]';
+    const favoritesArr = JSON.parse(favoritesJson);
+    for (let item of favoritesArr) {
+        console.log(item.show.name);
+    }
+
+};
+
 window.addEventListener('load', displayFavorites);
 form.addEventListener('submit', findShowsByName);
+buttonLog.addEventListener('click', getLogFavorites);
